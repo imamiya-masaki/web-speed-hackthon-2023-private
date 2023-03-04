@@ -6,7 +6,7 @@ import analyze from 'rollup-plugin-analyzer';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
 import viteCompression from 'vite-plugin-compression';
-import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
+// import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
 import { ViteEjsPlugin } from 'vite-plugin-ejs';
 import topLevelAwait from 'vite-plugin-top-level-await';
 import wasm from 'vite-plugin-wasm';
@@ -51,7 +51,7 @@ export default defineConfig(async ({mode}) => {
   }
   if (mode === 'production') {
     plugins.push(viteCompression())
-    plugins.push(chunkSplitPlugin())
+    // plugins.push(chunkSplitPlugin())
   }
   return {
     build: {
