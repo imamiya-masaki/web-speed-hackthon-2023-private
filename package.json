@@ -7,6 +7,7 @@
     "start:server": "nodemon --watch src/server --ext 'ts,tsx' --exec 'ts-node src/server'",
     "build": "npm-run-all -s build:tsc build:vite",
     "build:tsc": "tsc",
+    "analyze": "npx vite build --mode analyze",
     "build:vite": "cross-env NODE_ENV=production vite build",
     "format": "npm-run-all -s format:*",
     "format:prettier": "prettier --write './**/*.{ts,tsx,js,jsx,json}'",
@@ -58,7 +59,6 @@
     "styled-components": "5.3.6",
     "throttle-debounce": "5.0.0",
     "typeorm": "0.3.11",
-    "zipcode-ja": "0.0.7",
     "zod": "3.20.6"
   },
   "devDependencies": {
@@ -97,6 +97,7 @@
     "prettier-plugin-packagejson": "2.4.3",
     "prettier-plugin-sort-json": "1.0.0",
     "rollup-plugin-analyzer": "4.0.0",
+    "rollup-plugin-visualizer": "5.9.0",
     "stylelint": "15.1.0",
     "stylelint-config-recommended": "10.0.1",
     "stylelint-order": "6.0.2",

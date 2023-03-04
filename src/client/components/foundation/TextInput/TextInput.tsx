@@ -4,11 +4,12 @@ import * as styles from './TextInput.styles';
 
 type Props = Omit<ComponentProps<'input'>, 'className'> & {
   label: string;
+  addClass?: string;
 };
 
-export const TextInput: FC<Props> = ({ label, ...rest }) => (
+export const TextInput: FC<Props> = ({ addClass, label, ...rest }) => (
   <label className={styles.container()}>
     {label}
-    <input className={styles.input()} {...rest} />
+    <input className={`${styles.input()} ${addClass}`} {...rest} />
   </label>
 );
