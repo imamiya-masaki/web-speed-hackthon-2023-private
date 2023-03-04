@@ -9,7 +9,6 @@ import type {
 } from './fragments';
 import {
   AuthUserFragment,
-  FeatureSectionFragment,
   ProductReviewFragment,
   ProductWithReviewFragment,
   // RecommendationFragment,
@@ -81,11 +80,34 @@ export type GetRecommendationsQueryResponse = {
 };
 
 export const GetFeatureSectionsQuery = gql`
-  ${FeatureSectionFragment}
-
   query GetFeatureSections {
     features {
-      ...FeatureSectionFragment
+      id,
+      title
+      items {
+        id,
+        product {
+          id
+          name
+          price
+          description
+          media(filter: {isThumbnail: true}, limit: 1) {
+            id
+            isThumbnail
+            file {
+              id
+              filename
+              Width224Filename
+            }
+          }
+          offers {
+            id
+            price
+            startDate
+            endDate
+          }
+        }
+      } 
     }
   }
 `;

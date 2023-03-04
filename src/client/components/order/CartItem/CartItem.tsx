@@ -20,6 +20,7 @@ type Props = {
 };
 
 export const CartItem: FC<Props> = ({ item, onRemove, onUpdate }) => {
+  console.log("CardItem", item)
   const thumbnailFile = item.product.media.find((productMedia) => productMedia.isThumbnail)?.file;
   const { activeOffer } = useActiveOffer(item.product);
   const price = activeOffer?.price ?? item.product.price;
