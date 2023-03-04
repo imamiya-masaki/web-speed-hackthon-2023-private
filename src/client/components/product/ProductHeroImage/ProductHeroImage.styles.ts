@@ -14,7 +14,9 @@ export const container = () => css`
 
 export const image = () => css`
   height: 100%;
+  max-height: 576px;
   object-fit: cover;
+  object-position: center center;
   width: 100%;
 `;
 

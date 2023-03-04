@@ -138,20 +138,23 @@ async function seedMediaFiles(): Promise<MediaFile[]> {
   });
   let mediaList: MediaFile[] = [];
   const mediaMap: {[key: string]: MediaFile} = {}
+  console.log('filenames', filenames);
   for (const filename of filenames) {
-    if (filename.includes('width224')) {
+    if (filename.includes('-width224')) {
       const origin = filename.split('-width224')[0] + '.jpg'
       if (!mediaMap[origin]) {
         mediaMap[origin] = new MediaFile();
       }
       mediaMap[origin].Width224Filename = filename;
       mediaMap[origin].filename = origin;
-    } else if (filename.includes("width1024")) {
-      const origin = filename.split('.')[0].split('-')[1] + '.jpg'
+    } else if (filename.includes("width1024Image")) {
+      const origin = filename.split("/").slice(0,filename.split("/").length - 1).join('/') + '/' + filename.split('.')[0].split('-')[1] + '.jpg'
+      console.log({origin})
       if (!mediaMap[origin]) {
         mediaMap[origin] = new MediaFile();
       }
-      mediaMap[filename].Width1024Filename = filename;
+      mediaMap[origin].Width1024Filename = filename;
+      mediaMap[origin].filename = origin;
     } else {
       if (!mediaMap[filename]) {
         mediaMap[filename] = new MediaFile();
@@ -159,9 +162,14 @@ async function seedMediaFiles(): Promise<MediaFile[]> {
      mediaMap[filename].filename = filename;
     }
   }
+  console.log(Object.keys(mediaMap))
   mediaList = Object.values(mediaMap).map(v => {
+    console.log('viewww', v)
     if (!v.Width224Filename) {
       v.Width224Filename = v.filename;
+    }
+    if (!v.Width1024Filename) {
+      v.Width1024Filename = v.filename;
     }
     return v
   })
