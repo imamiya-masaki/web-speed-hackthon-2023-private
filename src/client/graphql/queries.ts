@@ -70,6 +70,7 @@ export const GetRecommendationsQuery = gql`
             filename
             Width224Filename
             Width1024Filename
+            Width46Filename
           }
         }
       }
@@ -100,6 +101,7 @@ export const GetFeatureSectionsQuery = gql`
               filename
               Width224Filename
               Width1024Filename
+              Width46Filename
             }
           }
           offers {

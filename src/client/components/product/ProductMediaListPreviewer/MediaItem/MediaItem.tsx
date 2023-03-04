@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 
-import type { MediaFileFragmentResponse } from '../../../../graphql/fragments';
 import { getMediaType } from '../../../../utils/get_media_type';
 import { Icon } from '../../../foundation/Icon';
 import { Image } from '../../../foundation/Image';
@@ -10,19 +9,19 @@ import * as styles from './MediaItem.styles';
 import { loadThumbnail } from './loadThumbnail';
 
 type Props = {
-  file: MediaFileFragmentResponse;
+  filename: string;
 };
 
-export const MediaItem: FC<Props> = ({ file }) => {
+export const MediaItem: FC<Props> = ({ filename }) => {
   const [imageSrc, setImageSrc] = useState<string>();
-  const mediaType = getMediaType(file.filename);
+  const mediaType = getMediaType(filename);
 
   useEffect(() => {
     if (mediaType === 'image') {
-      return setImageSrc(file.filename);
+      return setImageSrc(filename);
     }
-    loadThumbnail(file.filename).then((url) => setImageSrc(url));
-  }, [file.filename, mediaType]);
+    loadThumbnail(filename).then((url) => setImageSrc(url));
+  }, [filename, mediaType]);
 
   if (imageSrc === undefined) {
     return null;

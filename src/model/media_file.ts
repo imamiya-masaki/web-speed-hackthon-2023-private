@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
 
 @Entity()
-@Unique(['filename', 'Width224Filename', 'Width1024Filename'])
+@Unique(['filename', 'Width224Filename', 'Width1024Filename', 'Width46Filename'])
 export class MediaFile {
   @PrimaryGeneratedColumn()
   id!: number;
@@ -14,4 +14,7 @@ export class MediaFile {
 
   @Column({nullable: true})
   Width1024Filename!: string;
+
+  @Column({nullable: true})
+  Width46Filename!: string;
 }

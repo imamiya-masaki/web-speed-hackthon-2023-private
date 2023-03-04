@@ -155,7 +155,15 @@ async function seedMediaFiles(): Promise<MediaFile[]> {
       }
       mediaMap[origin].Width1024Filename = filename;
       mediaMap[origin].filename = origin;
-    } else {
+    } else if (filename.includes("width46")) {
+      const origin = filename.split("/").slice(0,filename.split("/").length - 1).join('/') + '/' + filename.split('.')[0].split('-')[1] + '.jpg'
+      console.log({origin})
+      if (!mediaMap[origin]) {
+        mediaMap[origin] = new MediaFile();
+      }
+      mediaMap[origin].Width46Filename = filename;
+      mediaMap[origin].filename = origin;
+    }else {
       if (!mediaMap[filename]) {
         mediaMap[filename] = new MediaFile();
       }
@@ -170,6 +178,9 @@ async function seedMediaFiles(): Promise<MediaFile[]> {
     }
     if (!v.Width1024Filename) {
       v.Width1024Filename = v.filename;
+    }
+    if (!v.Width46Filename) {
+      v.Width46Filename = v.filename;
     }
     return v
   })
