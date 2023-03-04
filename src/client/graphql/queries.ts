@@ -12,7 +12,7 @@ import {
   FeatureSectionFragment,
   ProductReviewFragment,
   ProductWithReviewFragment,
-  RecommendationFragment,
+  // RecommendationFragment,
 } from './fragments';
 
 export const GetAuthUserQuery = gql`
@@ -55,11 +55,24 @@ export type GetProductDetailsQueryResponse = {
 };
 
 export const GetRecommendationsQuery = gql`
-  ${RecommendationFragment}
-
   query GetRecommendations {
     recommendations {
-      ...RecommendationFragment
+      id
+      product {
+        id,
+        name,
+        price,
+        description
+        media(filter: {isThumbnail: true}, limit: 1) {
+          id
+          isThumbnail
+          file {
+            id
+            filename
+            Width224Filename
+          }
+        }
+      }
     }
   }
 `;

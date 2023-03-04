@@ -1,9 +1,13 @@
+input filterIsThumbnail {
+  isThumbnail: Boolean
+}
+
 type Product {
   id: Int!
   name: String!
   price: Int!
   description: String!
-  media: [ProductMedia!]!
+  media(filter: filterIsThumbnail, limit: Int): [ProductMedia!]!
   offers: [LimitedTimeOffer!]!
   reviews: [Review!]!
 }

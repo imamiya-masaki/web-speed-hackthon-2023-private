@@ -7,11 +7,14 @@ import { dataSource } from '../data_source';
 import type { GraphQLModelResolver } from './model_resolver';
 
 export const productResolver: GraphQLModelResolver<Product> = {
-  media: (parent) => {
+  // @ts-ignore
+  media: (parent, {filter, limit}) => {
     return dataSource.manager.find(ProductMedia, {
       where: {
+        isThumbnail: filter.isThumbnail,
         product: parent,
       },
+      take: limit
     });
   },
   offers: (parent) => {

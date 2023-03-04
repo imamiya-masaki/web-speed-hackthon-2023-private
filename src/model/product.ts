@@ -18,7 +18,7 @@ export class Product {
   @Column()
   description!: string;
 
-  @OneToMany(() => ProductMedia, (media) => media.product)
+  @OneToMany(() => ProductMedia, (media) => media.product, {nullable: true})
   media!: Relation<ProductMedia[]>;
 
   @OneToMany(() => LimitedTimeOffer, (offer) => offer.product)
