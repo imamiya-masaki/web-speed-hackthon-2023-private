@@ -5,11 +5,14 @@ import react from '@vitejs/plugin-react';
 import analyze from 'rollup-plugin-analyzer';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
+import viteCompression from 'vite-plugin-compression';
+import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
 import { ViteEjsPlugin } from 'vite-plugin-ejs';
 import topLevelAwait from 'vite-plugin-top-level-await';
 import wasm from 'vite-plugin-wasm';
 
 import { getFileList } from './tools/get_file_list';
+
 
 
 
@@ -45,6 +48,10 @@ export default defineConfig(async ({mode}) => {
   ]
   if (mode === 'development'){
     plugins.push(analyze)
+  }
+  if (mode === 'production') {
+    plugins.push(viteCompression())
+    plugins.push(chunkSplitPlugin())
   }
   return {
     build: {
