@@ -1,12 +1,16 @@
 import path from 'node:path';
 
+
 import react from '@vitejs/plugin-react';
+import analyze from 'rollup-plugin-analyzer'
 import { defineConfig } from 'vite';
 import { ViteEjsPlugin } from 'vite-plugin-ejs';
 import topLevelAwait from 'vite-plugin-top-level-await';
 import wasm from 'vite-plugin-wasm';
 
 import { getFileList } from './tools/get_file_list';
+
+
 
 const publicDir = path.resolve(__dirname, './public');
 const getPublicFileList = async (targetPath: string) => {
@@ -18,31 +22,35 @@ const getPublicFileList = async (targetPath: string) => {
   return publicFiles;
 };
 
-export default defineConfig(async () => {
+export default defineConfig(async ({mode}) => {
   const videos = await getPublicFileList(path.resolve(publicDir, 'videos'));
 
+  const plugins = [
+    react(),
+    wasm(),
+    topLevelAwait(),
+    ViteEjsPlugin({
+      module: '/src/client/index.tsx',
+      title: '買えるオーガニック',
+      videos,
+    }),
+  ]
+  if (mode === 'development'){
+    plugins.push(analyze)
+  }
   return {
     build: {
-      assetsInlineLimit: 20480,
-      cssCodeSplit: false,
-      cssTarget: 'es6',
-      minify: false,
-      rollupOptions: {
-        output: {
-          experimentalMinChunkSize: 40960,
-        },
-      },
-      target: 'es2015',
+      // assetsInlineLimit: 20480,
+      cssCodeSplit: mode == 'production',
+      minify: mode  == 'production' ? 'terser' : false,
+      // rollupOptions: {
+      //   output: {
+      //     experimentalMinChunkSize: 40960,
+      //   },
+      // },
+      sourcemap: mode == 'develop' ? true : false,
+      target: 'es2022',
     },
-    plugins: [
-      react(),
-      wasm(),
-      topLevelAwait(),
-      ViteEjsPlugin({
-        module: '/src/client/index.tsx',
-        title: '買えるオーガニック',
-        videos,
-      }),
-    ],
+    plugins
   };
 });
