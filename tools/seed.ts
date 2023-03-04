@@ -136,14 +136,30 @@ async function seedMediaFiles(): Promise<MediaFile[]> {
     const relativePath = path.relative(publicDir, file);
     return '/' + relativePath;
   });
-  const mediaList: MediaFile[] = [];
-
+  let mediaList: MediaFile[] = [];
+  const mediaMap: {[key: string]: MediaFile} = {}
   for (const filename of filenames) {
-    const media = new MediaFile();
-    media.filename = filename;
-    mediaList.push(media);
+    if (filename.includes('width224')) {
+      const origin = filename.split('-width224')[0] + '.jpg'
+      if (!mediaMap[origin]) {
+        mediaMap[origin] = new MediaFile();
+      }
+      mediaMap[origin].Width224Filename = filename;
+      mediaMap[origin].filename = origin;
+    } else {
+      if (!mediaMap[filename]) {
+        mediaMap[filename] = new MediaFile();
+      }
+     mediaMap[filename].filename = filename;
+    }
   }
-
+  mediaList = Object.values(mediaMap).map(v => {
+    if (!v.Width224Filename) {
+      v.Width224Filename = v.filename;
+    }
+    return v
+  })
+  console.log('mediaList', mediaList)
   await insert(mediaList);
 
   return mediaList;
@@ -194,7 +210,8 @@ async function seedProducts({ mediaList }: { mediaList: MediaFile[] }): Promise<
       for (const vegetableFruitName of vegetableFruitNames) {
         const vegetableFruitImages = mediaList.filter((m) =>
           m.filename.includes(`/products/${vegetableFruitName.name}/`),
-        );
+        )
+        console.log('vegetableFruitImages', vegetableFruitImages);
         const videos = mediaList.filter((m) => m.filename.includes('/videos/'));
 
         const productMediaList: ProductMedia[] = [];

@@ -14,9 +14,10 @@ type Props = {
   product: ProductFragmentResponse;
 };
 
-export const ProductCard: FC<Props> = ({ product }) => {
+export const ProductCard: FC<Props> = ({ product }) => {  
   const thumbnailFile = product.media.find((productMedia) => productMedia.isThumbnail)?.file;
-
+  // console.log(thumbnailFile)
+  // debugger;
   const { activeOffer } = useActiveOffer(product);
   const price = activeOffer?.price ?? product.price;
 
@@ -26,7 +27,7 @@ export const ProductCard: FC<Props> = ({ product }) => {
         {thumbnailFile ? (
           <div className={styles.image()}>
             <AspectRatio ratioHeight={9} ratioWidth={16}>
-              <Image height={126} src={thumbnailFile.filename} width={224} />
+              <Image height={126} src={thumbnailFile.Width224Filename} width={224} />
             </AspectRatio>
           </div>
         ) : null}

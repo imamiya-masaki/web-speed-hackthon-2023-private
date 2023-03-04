@@ -17,9 +17,10 @@ export const MediaFileFragment = gql`
   fragment MediaFileFragment on MediaFile {
     id
     filename
+    Width224Filename
   }
 `;
-export type MediaFileFragmentResponse = Pick<MediaFile, 'id' | 'filename'>;
+export type MediaFileFragmentResponse = Pick<MediaFile, 'id' | 'filename' | 'Width224Filename'>;
 
 export const LimitedTimeOfferFragment = gql`
   fragment LimitedTimeOfferFragment on LimitedTimeOffer {
