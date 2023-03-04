@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import isEqual from 'lodash/isEqual';
 import type { FC } from 'react';
 import { memo } from 'react';
 
@@ -10,6 +10,13 @@ import { ProductListSlider } from '../ProductListSlider';
 type Props = {
   featureSection: FeatureSectionFragmentResponse;
 };
+
+// const func = (prevProps: Readonly<any>, nextProps: Readonly<any>) => {
+//   const a =  isEqual(prevProps, nextProps)
+//   console.log('a', a)
+//   console.log('isEqual', prevProps, nextProps)
+//   return a
+// }
 
 export const ProductList: FC<Props> = memo(({ featureSection }) => {
   return (
@@ -26,6 +33,6 @@ export const ProductList: FC<Props> = memo(({ featureSection }) => {
       }}
     </GetDeviceType>
   );
-}, _.isEqual);
+}, isEqual);
 
 ProductList.displayName = 'ProductList';
