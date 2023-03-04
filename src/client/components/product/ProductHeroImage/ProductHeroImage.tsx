@@ -40,8 +40,9 @@ type Props = {
 };
 
 export const ProductHeroImage: FC<Props> = memo(({ product, title }) => {
-  const thumbnailFile = product.media.find((productMedia) => productMedia.isThumbnail)?.file;
-
+  // const thumbnailFile = product.media.find((productMedia) => productMedia.isThumbnail)?.file;
+  console.log('ProductHeroImage', product)
+  const thumbnailFile = product.media[0].file
   const [imageDataUrl, setImageDataUrl] = useState<string>();
 
   useEffect(() => {

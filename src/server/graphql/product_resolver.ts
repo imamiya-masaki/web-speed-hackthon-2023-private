@@ -8,14 +8,20 @@ import type { GraphQLModelResolver } from './model_resolver';
 
 export const productResolver: GraphQLModelResolver<Product> = {
   // @ts-ignore
-  media: (parent, {filter, limit}) => {
-    return dataSource.manager.find(ProductMedia, {
+  media: (parent, res) => {
+    const object: any = {
       where: {
-        isThumbnail: filter.isThumbnail,
-        product: parent,
+        product: parent
       },
-      take: limit
-    });
+    }
+    const {filter, limit} = res
+    if (filter?.isThumbnail !== undefined) {
+      object.where.isThumbnail = filter.isThumbnail
+    }
+    if (limit !== undefined) {
+      object.take = limit
+    }
+    return dataSource.manager.find(ProductMedia, object);
   },
   offers: (parent) => {
     return dataSource.manager.find(LimitedTimeOffer, {
