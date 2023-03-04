@@ -12,6 +12,7 @@ type Props = {
   featureSection: FeatureSectionFragmentResponse;
 };
 
+
 export const ProductListSlider: FC<Props> = ({ featureSection }) => {
   const products = featureSection.items.map((item) => item.product);
 
