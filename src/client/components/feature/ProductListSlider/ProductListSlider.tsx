@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import type { FC } from 'react';
 
 import type { FeatureSectionFragmentResponse } from '../../../graphql/fragments';
+import { pc_area } from '../../media.styles'
 import { ProductCard } from '../ProductCard';
 import { ArrowType, ProductListSlideButton } from '../ProductListSlideButton';
 
@@ -21,7 +22,7 @@ export const ProductListSlider: FC<Props> = ({ featureSection }) => {
   });
 
   return (
-    <div className={styles.container()}>
+    <div className={`${styles.container()} ${pc_area()}`}>
       <div className={styles.slideButton()}>
         <ProductListSlideButton
           arrowType={ArrowType.LEFT}

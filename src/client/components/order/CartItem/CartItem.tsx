@@ -6,7 +6,6 @@ import type { ShoppingCartItemFragmentResponse } from '../../../graphql/fragment
 import { useActiveOffer } from '../../../hooks/useActiveOffer';
 import { normalizeCartItemCount } from '../../../utils/normalize_cart_item';
 import { Anchor } from '../../foundation/Anchor';
-import { DeviceType, GetDeviceType } from '../../foundation/GetDeviceType';
 import { Image } from '../../foundation/Image';
 import { OutlineButton } from '../../foundation/OutlineButton';
 import { ProductOfferLabel } from '../../product/ProductOfferLabel';
@@ -31,24 +30,15 @@ export const CartItem: FC<Props> = ({ item, onRemove, onUpdate }) => {
   };
 
   return (
-    <GetDeviceType>
-      {({ deviceType }) => {
-        return (
           <div
-            className={classNames(styles.container(), {
-              [styles.container__desktop()]: deviceType === DeviceType.DESKTOP,
-              [styles.container__mobile()]: deviceType === DeviceType.MOBILE,
-            })}
+            className={classNames(styles.container())}
           >
             <div className={styles.item()}>
               <Anchor href={`/product/${item.product.id}`}>
                 <div className={styles.itemInner()}>
                   {thumbnailFile ? (
                     <div
-                      className={classNames(styles.thumbnail(), {
-                        [styles.thumbnail__desktop()]: deviceType === DeviceType.DESKTOP,
-                        [styles.thumbnail__mobile()]: deviceType === DeviceType.MOBILE,
-                      })}
+                      className={classNames(styles.thumbnail())}
                     >
 
                       <div style={{aspectRatio: "16/9", position: "relative"}}>
@@ -71,10 +61,7 @@ export const CartItem: FC<Props> = ({ item, onRemove, onUpdate }) => {
               </Anchor>
             </div>
             <div
-              className={classNames(styles.container(), {
-                [styles.controller__desktop()]: deviceType === DeviceType.DESKTOP,
-                [styles.controller__mobile()]: deviceType === DeviceType.MOBILE,
-              })}
+              className={classNames(styles.container())}
             >
               <label className={styles.counter()}>
                 個数:
@@ -92,8 +79,5 @@ export const CartItem: FC<Props> = ({ item, onRemove, onUpdate }) => {
               </OutlineButton>
             </div>
           </div>
-        );
-      }}
-    </GetDeviceType>
   );
 };

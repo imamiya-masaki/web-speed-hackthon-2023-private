@@ -12,15 +12,41 @@ export const itemList = () => css`
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  @media screen and (min-width:1024px) {
+    flex-direction: row;
+  }
+  @media screen and (max-width:1024px) {
+    flex-direction: column;
+  }
 `;
 
-export const itemList__desktop = () => css`
-  flex-direction: row;
+/**
+ * 
+ * @returns 
+ * export const pc_area = () => css`
+  display: none;
+  @media screen and (min-width:1024px) {
+    display: inherit; 
+  }
 `;
 
-export const itemList__mobile = () => css`
-  flex-direction: column;
+export const sp_area = () => css`
+  display: none;
+  @media screen and (max-width:1024px) {
+    display: inherit; 
+  }
 `;
+ */
+
+// export const itemList__desktop = () => css`
+//   flex-direction: row;
+  
+// `;
+
+// export const itemList__mobile = () => css`
+//   flex-direction: column;
+// `;
 
 export const item = () => css`
   color: #222222;

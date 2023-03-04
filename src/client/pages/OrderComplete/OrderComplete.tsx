@@ -5,7 +5,6 @@ import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
 
 import { Layout } from '../../components/application/Layout';
-import { DeviceType, GetDeviceType } from '../../components/foundation/GetDeviceType';
 import { PrimaryAnchor } from '../../components/foundation/PrimaryAnchor';
 import { WidthRestriction } from '../../components/foundation/WidthRestriction';
 import { ProductHeroImage } from '../../components/product/ProductHeroImage';
@@ -41,8 +40,6 @@ export const OrderComplete: FC = () => {
         <title>購入が完了しました</title>
       </Helmet>
       <Layout>
-        <GetDeviceType>
-          {({ deviceType }) => (
             <WidthRestriction>
               <div className={styles.container()}>
                 <div className={styles.notice()}>
@@ -50,10 +47,7 @@ export const OrderComplete: FC = () => {
                   <div style={{aspectRatio: "2/1", position: "relative"}}>
                     <div className={styles.noticeDescriptionWrapper()}>
                       <p
-                        className={classNames(styles.noticeDescription(), {
-                          [styles.noticeDescription__desktop()]: deviceType === DeviceType.DESKTOP,
-                          [styles.noticeDescription__mobile()]: deviceType === DeviceType.MOBILE,
-                        })}
+                        className={classNames(styles.noticeDescription())}
                       >
                         このサイトは架空のサイトであり、商品が発送されることはありません
                       </p>
@@ -73,8 +67,6 @@ export const OrderComplete: FC = () => {
                 </div>
               </div>
             </WidthRestriction>
-          )}
-        </GetDeviceType>
       </Layout>
     </>
   );

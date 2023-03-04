@@ -26,15 +26,21 @@ export const noticeDescriptionWrapper = () => css`
 export const noticeDescription = () => css`
   font-family: 'Noto Serif JP', sans-serif;
   text-align: center;
+  @media screen and (min-width:1024px) {
+    font-size: 1.125rem;
+  }
+  @media screen and (max-width:1024px) {
+    font-size: 1rem;
+  }
 `;
 
-export const noticeDescription__desktop = () => css`
-  font-size: 1.125rem;
-`;
+// export const noticeDescription__desktop = () => css`
+//   font-size: 1.125rem;
+// `;
 
-export const noticeDescription__mobile = () => css`
-  font-size: 1rem;
-`;
+// export const noticeDescription__mobile = () => css`
+//   font-size: 1rem;
+// `;
 
 export const recommended = () => css`
   display: flex;
