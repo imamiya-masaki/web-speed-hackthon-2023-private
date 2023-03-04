@@ -2,4 +2,5 @@ type MediaFile {
   id: Int!
   filename: String!
   Width224Filename: String!
+  Width1024Filename: String!
 }

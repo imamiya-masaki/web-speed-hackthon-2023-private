@@ -1,4 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { string } from 'zod';
 
 @Entity()
 @Unique(['filename', 'Width224Filename'])
@@ -11,4 +12,7 @@ export class MediaFile {
 
   @Column({nullable: true})
   Width224Filename!: string;
+
+  @Column({nullable: true})
+  Width1024Filename!: string;
 }

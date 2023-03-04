@@ -146,6 +146,12 @@ async function seedMediaFiles(): Promise<MediaFile[]> {
       }
       mediaMap[origin].Width224Filename = filename;
       mediaMap[origin].filename = origin;
+    } else if (filename.includes("width1024")) {
+      const origin = filename.split('.')[0].split('-')[1] + '.jpg'
+      if (!mediaMap[origin]) {
+        mediaMap[origin] = new MediaFile();
+      }
+      mediaMap[filename].Width1024Filename = filename;
     } else {
       if (!mediaMap[filename]) {
         mediaMap[filename] = new MediaFile();
