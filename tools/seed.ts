@@ -246,7 +246,7 @@ async function seedProducts({ mediaList }: { mediaList: MediaFile[] }): Promise<
         }
 
         if (index % 3 === 0) {
-          const offerHour = index % 24;
+          const offerHour = index % 24; // 3 6 9 12 15 18 21 24
           for (let offset = -10; offset <= 10; offset++) {
             const startDate = BASE_DATE.toZonedDateTimeISO(TZ).add({ days: offset }).withPlainTime({
               hour: offerHour,
