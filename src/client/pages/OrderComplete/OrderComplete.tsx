@@ -47,7 +47,7 @@ export const OrderComplete: FC = () => {
               <div className={styles.container()}>
                 <div className={styles.notice()}>
                   <h2 className={styles.noticeHeading()}>購入が完了しました</h2>
-                  <div style={{aspectRatio: "2/1"}}>
+                  <div style={{aspectRatio: "2/1", position: "relative"}}>
                     <div className={styles.noticeDescriptionWrapper()}>
                       <p
                         className={classNames(styles.noticeDescription(), {

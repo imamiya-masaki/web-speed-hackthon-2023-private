@@ -21,7 +21,7 @@ export const ProductMediaListPreviewer: FC<Props> = ({ product }) => {
 
   return (
     <div className={styles.container()}>
-        <div style={{aspectRatio: "16/9"}}>
+        <div style={{aspectRatio: "16/9", position: "relative"}}>
           <MediaItemPreviewer file={product.media[activeIndex].file} />
         </div>
       <div className={styles.itemListWrapper()}>
@@ -31,7 +31,7 @@ export const ProductMediaListPreviewer: FC<Props> = ({ product }) => {
 
             return (
               <li key={media.id} className={styles.item()}>
-                <div style={{aspectRatio: "1/1"}}>
+                <div style={{aspectRatio: "1/1", position: "relative"}}>
                   <button
                     className={classNames(styles.itemSelectButton(), {
                       [styles.itemSelectButton__disabled()]: disabled,

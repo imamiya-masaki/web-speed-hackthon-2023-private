@@ -24,7 +24,7 @@ export const ProductCard: FC<Props> = ({ product }) => {
     <Anchor href={`/product/${product.id}`}>
       <div className={styles.inner()}>
         {thumbnailFile ? (
-          <div className={styles.image()} style={{aspectRatio: "16/9"}}>
+          <div className={styles.image()} style={{aspectRatio: "16/9", position: "relative"}}>
             <Image height={126} src={thumbnailFile.Width224Filename} width={224} />
           </div>
         ) : null}

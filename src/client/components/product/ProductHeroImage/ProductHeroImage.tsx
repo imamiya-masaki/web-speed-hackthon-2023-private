@@ -63,9 +63,8 @@ export const ProductHeroImage: FC<Props> = memo(({ product, title }) => {
             <Anchor href={`/product/${product.id}`}>
               <div className={styles.container()}>
                 <div style={{aspectRatio: "16/9"}}>
-                  <img className={styles.image()} src={imageDataUrl} />
+                    <img className={styles.image()} src={imageDataUrl} />
                 </div>
-
                 <div className={styles.overlay()}>
                   <p
                     className={classNames(styles.title(), {

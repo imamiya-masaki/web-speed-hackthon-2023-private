@@ -50,7 +50,7 @@ export const CartItem: FC<Props> = ({ item, onRemove, onUpdate }) => {
                       })}
                     >
 
-                      <div style={{aspectRatio: "16/9"}}>
+                      <div style={{aspectRatio: "16/9", position: "relative"}}>
                         <Image fill src={thumbnailFile.filename} />
                       </div>
                       {activeOffer !== undefined && (
