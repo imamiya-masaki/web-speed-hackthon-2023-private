@@ -1,4 +1,6 @@
 import classNames from 'classnames';
+import isEqual from 'lodash/isEqual';
+import { memo } from 'react';
 import type { FC } from 'react';
 
 import type { ProductFragmentResponse } from '../../../graphql/fragments';
@@ -12,7 +14,7 @@ type Props = {
   title: string;
 };
 
-export const ProductHeroImage: FC<Props> = ({ product, title }) => {
+export const ProductHeroImage: FC<Props> = memo(({ product, title }) => {
   // const thumbnailFile = product.media.find((productMedia) => productMedia.isThumbnail)?.file;
   console.log('ProductHeroImage', product)
   const thumbnailFile = product.media[0].file
@@ -40,6 +42,6 @@ export const ProductHeroImage: FC<Props> = ({ product, title }) => {
             </Anchor>
           </WidthRestriction>
   );
-};
+}, isEqual);
 
 ProductHeroImage.displayName = 'ProductHeroImage';

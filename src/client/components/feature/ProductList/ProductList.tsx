@@ -1,4 +1,6 @@
+import isEqual from 'lodash/isEqual';
 import type { FC } from 'react';
+import { memo } from 'react';
 
 import type { FeatureSectionFragmentResponse } from '../../../graphql/fragments';
 import { ProductGridList } from '../ProductGridList';
@@ -8,13 +10,13 @@ type Props = {
   featureSection: FeatureSectionFragmentResponse;
 };
 
-export const ProductList: FC<Props> = ({ featureSection }) => {
+export const ProductList: FC<Props> = memo(({ featureSection }) => {
   return (
     <>
       <ProductListSlider featureSection={featureSection} />
       <ProductGridList featureSection={featureSection} />
     </>
   );
-};
+}, isEqual);
 
 ProductList.displayName = 'ProductList';
