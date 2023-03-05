@@ -2,9 +2,8 @@ import path from 'node:path';
 
 
 import react from '@vitejs/plugin-react';
-import analyze from 'rollup-plugin-analyzer';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { defineConfig } from 'vite';
+import { defineConfig, splitVendorChunkPlugin } from 'vite';
 import viteCompression from 'vite-plugin-compression';
 // import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
 import { ViteEjsPlugin } from 'vite-plugin-ejs';
@@ -27,6 +26,8 @@ const getPublicFileList = async (targetPath: string) => {
 };
 
 export default defineConfig(async ({mode}) => {
+  const m = mode;
+  console.log('m', m)
   const videos = await getPublicFileList(path.resolve(publicDir, 'videos'));
 
   const plugins = [
@@ -38,7 +39,7 @@ export default defineConfig(async ({mode}) => {
       title: '買えるオーガニック',
       videos,
     }),
-    mode === 'analyze' &&
+    m === 'analyze' &&
     visualizer({
       open: true,
       filename: 'dist/stats.html',
@@ -46,24 +47,22 @@ export default defineConfig(async ({mode}) => {
       brotliSize: true,
     }),
   ]
-  if (mode === 'development'){
-    plugins.push(analyze)
-  }
-  if (mode === 'production') {
+  if (m === 'production') {
     plugins.push(viteCompression())
+    plugins.push(splitVendorChunkPlugin())
     // plugins.push(chunkSplitPlugin())
   }
   return {
     build: {
       // assetsInlineLimit: 20480,
-      cssCodeSplit: mode == 'production',
-      minify: mode  == 'production' ? 'terser' : false,
+      cssCodeSplit: m == 'production',
+      minify: m  == 'production' ? 'terser' : false,
       // rollupOptions: {
       //   output: {
       //     experimentalMinChunkSize: 40960,
       //   },
       // },
-      sourcemap: mode == 'develop' ? true : false,
+      sourcemap: m == 'development' ? true : false,
       target: 'es2022',
     },
     plugins

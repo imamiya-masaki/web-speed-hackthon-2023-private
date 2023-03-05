@@ -1,4 +1,3 @@
-import { Temporal } from '@js-temporal/polyfill';
 import * as bcrypt from 'bcrypt';
 import type { GraphQLFieldResolver } from 'graphql';
 
@@ -56,8 +55,8 @@ export const mutationResolver: MutationResolver = {
       throw new Error('Authentication required.');
     }
 
-    const postedAt = Temporal.Now.instant().toString({ timeZone: Temporal.TimeZone.from('UTC') });
-
+    // const postedAt = Temporal.Now.instant().toString({ timeZone: Temporal.TimeZone.from('UTC') });
+    const postedAt = new Date().toUTCString()
     await dataSource.manager.save(
       dataSource.manager.create(Review, {
         comment: args.comment,

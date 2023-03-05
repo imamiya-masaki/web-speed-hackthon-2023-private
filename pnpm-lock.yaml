@@ -69,7 +69,6 @@ specifiers:
   reflect-metadata: 0.1.13
   rollup-plugin-analyzer: 4.0.0
   rollup-plugin-visualizer: 5.9.0
-  setimmediate: 1.0.5
   sqlite3: 5.1.4
   styled-components: 5.3.6
   stylelint: 15.1.0
@@ -91,7 +90,6 @@ dependencies:
   '@apollo/server': 4.3.0_graphql@16.6.0
   '@as-integrations/koa': 0.2.1_g7mswurbupr7ivx7jgbyjqm5pu
   '@emotion/css': 11.10.5_@babel+core@7.20.5
-  '@js-temporal/polyfill': 0.4.3
   '@koa/router': 12.0.0
   '@types/koa-session': 5.10.6
   bcrypt: 5.1.0
@@ -119,7 +117,6 @@ dependencies:
   react-router-dom: 6.4.5_biqbaboplfbrettd7655fr4n2y
   recoil: 0.7.6_biqbaboplfbrettd7655fr4n2y
   reflect-metadata: 0.1.13
-  setimmediate: 1.0.5
   sqlite3: 5.1.4
   styled-components: 5.3.6_7i5myeigehqah43i5u7wbekgba
   typeorm: 0.3.11_h3l5zcb3i6sggvllyfknv6gs44
@@ -127,6 +124,7 @@ dependencies:
 
 devDependencies:
   '@babel/core': 7.20.5
+  '@js-temporal/polyfill': 0.4.3
   '@types/bcrypt': 5.0.0
   '@types/currency-formatter': 1.5.1
   '@types/koa': 2.13.5
@@ -1253,8 +1251,8 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       jsbi: 4.3.0
-      tslib: 2.4.1
-    dev: false
+      tslib: 2.5.0
+    dev: true
 
   /@koa/router/12.0.0:
     resolution: {integrity: sha512-cnnxeKHXlt7XARJptflGURdJaO+ITpNkOHmQu7NHmCoRinPbyvFzce/EG/E8Zy81yQ1W9MoSdtklc3nyaDReUw==}
@@ -4309,7 +4307,7 @@ packages:
 
   /jsbi/4.3.0:
     resolution: {integrity: sha512-SnZNcinB4RIcnEyZqFPdGPVgrg2AcnykiBy0sHVJQKHYeaLUvi3Exj+iaPpLnFVkDPZIV4U0yvgC9/R4uEAZ9g==}
-    dev: false
+    dev: true
 
   /jsesc/2.5.2:
     resolution: {integrity: sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==}
@@ -5819,10 +5817,6 @@ packages:
 
   /set-blocking/2.0.0:
     resolution: {integrity: sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==}
-    dev: false
-
-  /setimmediate/1.0.5:
-    resolution: {integrity: sha512-MATJdZp8sLqDl/68LfQmbP8zKPLQNV6BIZoIgrscFDQ+RsvK/BxeDQOgyxKKoh0y/8h3BqVFnCqQ/gd+reiIXA==}
     dev: false
 
   /setprototypeof/1.1.0:

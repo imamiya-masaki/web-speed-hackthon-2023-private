@@ -9,6 +9,20 @@ type Props = {
   reviews: ReviewFragmentResponse[];
 };
 
+const DateString = (dateString: string) => {
+  const date = new Date(dateString)
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minutes = date.getMinutes()
+  const second = date.getSeconds()
+  const month = date.getMonth() + 1;
+  const zeroadd = (a: number) => {
+    return `${a <= 9 ? `0${a}`: `${a}`}`
+  }
+  const year = date.getFullYear();
+  return `${year}/${zeroadd(month)}/${zeroadd(day)} ${zeroadd(hour)}:${zeroadd(minutes)}:${zeroadd(second)}`
+}
+
 export const ReviewList: FC<Props> = ({ reviews }) => {
   if (reviews.length === 0) {
     return null;
@@ -17,14 +31,7 @@ export const ReviewList: FC<Props> = ({ reviews }) => {
   return (
     <ul className={styles.itemList()}>
       {reviews.map((review) => {
-        const endTime = window.Temporal.Instant.from(review.postedAt).toLocaleString('ja-jp', {
-          day: '2-digit',
-          hour: '2-digit',
-          minute: '2-digit',
-          month: '2-digit',
-          second: '2-digit',
-          year: 'numeric',
-        });
+        const endTime = DateString(review.postedAt)
 
         return (
           <li key={review.id} className={styles.item()} data-testid="review-list-item">

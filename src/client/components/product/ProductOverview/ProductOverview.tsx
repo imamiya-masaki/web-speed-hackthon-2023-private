@@ -23,14 +23,21 @@ export const ProductOverview: FC<Props> = memo(({ activeOffer, product }) => {
       return;
     }
 
-    const endTime = window.Temporal.Instant.from(activeOffer.endDate).toLocaleString('ja-jp', {
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      month: '2-digit',
-      second: '2-digit',
-      year: 'numeric',
-    });
+    const DateString = (dateString: string) => {
+      const date = new Date(dateString)
+      const day = date.getDate()
+      const hour = date.getHours()
+      const minutes = date.getMinutes()
+      const second = date.getSeconds()
+      const month = date.getMonth() + 1;
+      const zeroadd = (a: number) => {
+        return `${a <= 9 ? `0${a}`: `${a}`}`
+      }
+      const year = date.getFullYear();
+      return `${year}/${zeroadd(month)}/${zeroadd(day)} ${zeroadd(hour)}:${zeroadd(minutes)}:${zeroadd(second)}`
+    }
+
+    const endTime = DateString(activeOffer.endDate)
 
     return (
       <div className={styles.offerLabel()}>
