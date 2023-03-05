@@ -1,7 +1,6 @@
 import path from 'node:path';
 
 import { Temporal } from '@js-temporal/polyfill';
-import * as bcrypt from 'bcrypt';
 
 import { FeatureItem } from '../src/model/feature_item';
 import { FeatureSection } from '../src/model/feature_section';
@@ -138,8 +137,27 @@ async function seedMediaFiles(): Promise<MediaFile[]> {
   });
   let mediaList: MediaFile[] = [];
   const mediaMap: {[key: string]: MediaFile} = {}
-  console.log('filenames', filenames);
+  console.log('filenames', filenames.filter(s => s.includes('video')));
   for (const filename of filenames) {
+    if (filename.includes("videos")) {
+        const filen = filename.split('/')[ filename.split('/').length - 1]
+        const [name, extension] = filen.split('.')
+        const origin = filename.split('/').slice(0,filename.split('/').length - 1).join('/')+"/" + name;
+        console.log([origin, extension], "dada")
+        if (!mediaMap[origin]) {
+          mediaMap[origin] = new MediaFile();
+        }
+        switch(extension) {
+          case 'png':
+            mediaMap[origin].Width224Filename = filename
+            mediaMap[origin].Width46Filename = filename
+            break;
+          case 'mp4':
+            mediaMap[origin].filename = filename
+            break
+        }
+      break
+    }
     if (filename.includes('-width224')) {
       const origin = filename.split('-width224')[0] + '.jpg'
       if (!mediaMap[origin]) {
@@ -182,6 +200,9 @@ async function seedMediaFiles(): Promise<MediaFile[]> {
     if (!v.Width46Filename) {
       v.Width46Filename = v.filename;
     }
+    if (v.filename.includes('video')) {
+      v.Width46Filename = v.Width46Filename.replace('mp4', 'png')
+    }
     return v
   })
   console.log('mediaList', mediaList)
@@ -193,18 +214,18 @@ async function seedMediaFiles(): Promise<MediaFile[]> {
 async function seedUsers({ mediaList }: { mediaList: MediaFile[] }): Promise<User[]> {
   let index = 1;
 
-  const avatars = mediaList.filter((m) => m.filename.includes('/avatars/'));
+  const avatars = mediaList.filter((m) => m.filename.includes('/avatars/')).filter(m => m.filename.includes("width52"));
   const users: User[] = [];
   const profiles: Profile[] = [];
 
   for (const familyName of familyNames) {
     for (const givenName of givenNames) {
       const asciiName = `${familyName.name}_${givenName.name}`;
-      const password = await bcrypt.hash(asciiName, 10);
-
+      const password = asciiName;
       const user = new User();
       user.email = `${asciiName}@example.com`;
       user.password = password;
+      console.log({email: user.email, asciiName})
       users.push(user);
 
       const profile = new Profile();

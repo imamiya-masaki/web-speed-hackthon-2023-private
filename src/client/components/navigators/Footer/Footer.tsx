@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 import type { FC } from 'react';
+import {lazy} from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { Image } from '../../foundation/Image';
+const Image = lazy(() => import('../../foundation/Image'));
 
 import * as styles from './Footer.styles';
 

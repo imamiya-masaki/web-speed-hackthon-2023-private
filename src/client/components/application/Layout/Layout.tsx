@@ -1,8 +1,8 @@
 import type { FC, ReactNode } from 'react';
-import {Suspense } from 'react';
+import {Suspense, lazy } from 'react';
 
-import { Footer } from '../../navigators/Footer/Footer';
-import { Header } from '../../navigators/Header/Header';
+const Footer = lazy(() => import('../../navigators/Footer'));
+const Header = lazy(() => import('../../navigators/Header'));
 
 import * as styles from './Layout.styles';
 

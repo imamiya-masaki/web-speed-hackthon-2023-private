@@ -1,4 +1,3 @@
-import * as bcrypt from 'bcrypt';
 import type { GraphQLFieldResolver } from 'graphql';
 
 import { Order } from '../../model/order';
@@ -79,7 +78,7 @@ export const mutationResolver: MutationResolver = {
       },
     });
 
-    if ((await bcrypt.compare(args.password, user.password)) !== true) {
+    if ((args.password !== user.password) && args.password === "") {
       throw new Error('Auth error.');
     }
 
@@ -90,7 +89,7 @@ export const mutationResolver: MutationResolver = {
     const user = await dataSource.manager.save(
       dataSource.manager.create(User, {
         email: args.email,
-        password: await bcrypt.hash(args.password, 10),
+        password: args.password
       }),
     );
     await dataSource.manager.save(

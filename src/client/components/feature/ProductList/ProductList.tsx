@@ -1,10 +1,10 @@
 import isEqual from 'lodash/isEqual';
 import type { FC } from 'react';
-import { memo } from 'react';
+import { memo, lazy } from 'react';
 
 import type { FeatureSectionFragmentResponse } from '../../../graphql/fragments';
-import { ProductGridList } from '../ProductGridList';
-import { ProductListSlider } from '../ProductListSlider';
+const ProductGridList = lazy(() => import('../ProductGridList'));
+const ProductListSlider = lazy(() => import('../ProductListSlider'));
 
 type Props = {
   featureSection: FeatureSectionFragmentResponse;

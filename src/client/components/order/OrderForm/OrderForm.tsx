@@ -1,9 +1,9 @@
 import { useFormik } from 'formik';
 import type { ChangeEventHandler, FC } from 'react';
-import { useEffect } from 'react';
+import { lazy } from 'react';
 
-import { PrimaryButton } from '../../foundation/PrimaryButton';
-import { TextInput } from '../../foundation/TextInput';
+const PrimaryButton = lazy(() => import('../../foundation/PrimaryButton'));
+const TextInput = lazy(() => import('../../foundation/TextInput'));
 
 import * as styles from './OrderForm.styles';
 

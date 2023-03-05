@@ -1,9 +1,10 @@
 import classNames from 'classnames';
 import type { FC } from 'react';
+import {lazy} from 'react';
 
 import type { MediaFileFragmentResponse } from '../../../../graphql/fragments';
 import { getMediaType } from '../../../../utils/get_media_type';
-import { Image } from '../../../foundation/Image';
+const Image = lazy(() => import('../../../foundation/Image'));
 
 import * as styles from './MediaItemPreiewer.styles';
 
@@ -16,7 +17,7 @@ export const MediaItemPreviewer: FC<Props> = ({ file }) => {
 
   return (
     <div className={styles.container()}>
-      {type === 'image' && <Image fill src={file.filename} />}
+      {type === 'image' && <Image fill src={file.Width1024Filename ?? file.filename} />}
       {type === 'video' && (
             <video
               autoPlay

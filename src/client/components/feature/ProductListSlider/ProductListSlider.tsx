@@ -1,9 +1,11 @@
 import classNames from 'classnames';
 import type { FC } from 'react';
+import {lazy} from 'react';
 
 import type { FeatureSectionFragmentResponse } from '../../../graphql/fragments';
+
 import { pc_area } from '../../media.styles'
-import { ProductCard } from '../ProductCard';
+
 import { ArrowType, ProductListSlideButton } from '../ProductListSlideButton';
 
 import * as styles from './ProductListSlider.styles';
@@ -13,6 +15,7 @@ type Props = {
   featureSection: FeatureSectionFragmentResponse;
 };
 
+const ProductCard = lazy(() => import('../ProductCard'));
 
 export const ProductListSlider: FC<Props> = ({ featureSection }) => {
   const products = featureSection.items.map((item) => item.product);

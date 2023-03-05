@@ -1,6 +1,6 @@
-# fly.toml file generated for small-dust-814 on 2023-03-04T11:00:13+09:00
+# fly.toml file generated for hidden-forest-6090 on 2023-03-05T16:52:44+09:00
 
-app = "small-dust-814"
+app = "hidden-forest-6090"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []

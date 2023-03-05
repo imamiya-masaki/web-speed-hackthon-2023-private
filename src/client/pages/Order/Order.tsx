@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import { FC, Suspense } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,17 +20,14 @@ export const Order: FC = () => {
   const { updateCartItem } = useUpdateCartItem();
   const { submitOrder } = useSubmitOrder();
   const { order } = useOrder();
-
-  if (authUserLoading) {
-    return null;
-  }
+  
   if (!isAuthUser) {
     navigate('/');
     return null;
   }
 
   const renderContents = () => {
-    if (!authUser || order == undefined || order.items.length === 0) {
+    if (!authUserLoading || !authUser || order == undefined || order.items.length === 0) {
       return (
         <div className={styles.emptyContainer()}>
           <p className={styles.emptyDescription()}>商品がカートに入っていません</p>
@@ -65,6 +62,7 @@ export const Order: FC = () => {
 
         <div className={styles.addressForm()}>
           <h2 className={styles.addressFormHeading()}>お届け先</h2>
+          <Suspense>
           <OrderForm
             onSubmit={(values) => {
               submitOrder({
@@ -77,6 +75,7 @@ export const Order: FC = () => {
               });
             }}
           />
+          </Suspense>
         </div>
       </div>
     );

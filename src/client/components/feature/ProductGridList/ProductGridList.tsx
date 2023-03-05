@@ -1,8 +1,9 @@
 import type { FC } from 'react';
+import {lazy} from 'react';
 
 import type { FeatureSectionFragmentResponse } from '../../../graphql/fragments';
 import { sp_area } from '../../media.styles';
-import { ProductCard } from '../ProductCard';
+const ProductCard = lazy(() => import('../ProductCard'));
 
 import * as styles from './ProductGridList.styles';
 

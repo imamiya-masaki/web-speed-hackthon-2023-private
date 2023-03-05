@@ -6,13 +6,13 @@ import { Layout } from '../../components/application/Layout';
 import { ProductList } from '../../components/feature/ProductList';
 import { ProductHeroImage } from '../../components/product/ProductHeroImage';
 import { useFeatures } from '../../hooks/useFeatures';
-// import { useLazyFeatures } from '../../hooks/useLazyFeatures'
+import { useLazyFeatures } from '../../hooks/useLazyFeatures'
 
 import * as styles from './Top.styles';
 
 export const Top: FC = () => {
   const {features: prefeatures} = useFeatures(0,1)
-  const {features: nextFeatures} = useFeatures(1,10)
+  const {features: nextFeatures} = useLazyFeatures(1,10)
   
   return (
     <>
@@ -32,7 +32,7 @@ export const Top: FC = () => {
                 );
               })}
               <Suspense fallback={<div></div>}>
-              {nextFeatures.map((featureSection) => {
+              {nextFeatures?.map((featureSection) => {
                 return (
                   <div key={featureSection.id} className={styles.feature()}>
                     <h2 className={styles.featureHeading()}>{featureSection.title}</h2>

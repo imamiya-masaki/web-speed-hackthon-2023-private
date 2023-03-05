@@ -1,12 +1,11 @@
 import type { FC } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy } from 'react';
+
 
 import { getMediaType } from '../../../../utils/get_media_type';
-import { Icon } from '../../../foundation/Icon';
-import { Image } from '../../../foundation/Image';
+const Image = lazy(() => import('../../../foundation/Image'));
 
 import * as styles from './MediaItem.styles';
-import { loadThumbnail } from './loadThumbnail';
 
 type Props = {
   filename: string;
@@ -15,12 +14,10 @@ type Props = {
 export const MediaItem: FC<Props> = ({ filename }) => {
   const [imageSrc, setImageSrc] = useState<string>();
   const mediaType = getMediaType(filename);
-
   useEffect(() => {
     if (mediaType === 'image') {
       return setImageSrc(filename);
     }
-    loadThumbnail(filename).then((url) => setImageSrc(url));
   }, [filename, mediaType]);
 
   if (imageSrc === undefined) {
@@ -29,12 +26,7 @@ export const MediaItem: FC<Props> = ({ filename }) => {
 
   return (
     <div className={styles.container()}>
-      <Image fill src={imageSrc} />
-      {mediaType === 'video' && (
-        <div className={styles.playIcon()}>
-          <Icon color="#ffffff" height={16} type="FaPlay" width={16} />
-        </div>
-      )}
+      <Image fill src={imageSrc.replace('mp4', 'png')} />
     </div>
   );
 };

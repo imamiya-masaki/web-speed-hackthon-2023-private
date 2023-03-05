@@ -14,19 +14,17 @@ type Props = {
 
 export const ProductMediaListPreviewer: FC<Props> = ({ product }) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
-
-  if (product === undefined || product.media.length === 0) {
-    return null;
-  }
+  
+  const setProduct = product ?? {media: [{id: "", file: {"Width1024Filename": "", "Width224Filename": "", "Width46Filename": "", "filename": "", "id": 0}}]}
 
   return (
     <div className={styles.container()}>
         <div style={{aspectRatio: "16/9", position: "relative"}}>
-          <MediaItemPreviewer file={product.media[activeIndex].file} />
+          <MediaItemPreviewer file={setProduct.media[activeIndex].file} />
         </div>
       <div className={styles.itemListWrapper()}>
         <ul className={styles.itemList()}>
-          {product.media.map((media, index) => {
+          {setProduct.media.map((media, index) => {
             const disabled = index === activeIndex;
 
             return (

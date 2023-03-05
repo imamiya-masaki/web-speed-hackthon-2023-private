@@ -1,7 +1,9 @@
 import type { FC } from 'react';
+import {lazy} from 'react'
 
 import type { ReviewFragmentResponse } from '../../../graphql/fragments';
-import { Image } from '../../foundation/Image';
+
+const Image = lazy(() => import('../../foundation/Image'));
 
 import * as styles from './ReviewList.styles';
 

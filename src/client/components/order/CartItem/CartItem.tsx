@@ -1,12 +1,13 @@
 import classNames from 'classnames';
 import * as currencyFormatter from 'currency-formatter';
 import type { ChangeEventHandler, FC } from 'react';
+import {lazy} from 'react'
 
 import type { ShoppingCartItemFragmentResponse } from '../../../graphql/fragments';
 import { useActiveOffer } from '../../../hooks/useActiveOffer';
 import { normalizeCartItemCount } from '../../../utils/normalize_cart_item';
 import { Anchor } from '../../foundation/Anchor';
-import { Image } from '../../foundation/Image';
+const Image = lazy(() => import('../../foundation/Image'));
 import { OutlineButton } from '../../foundation/OutlineButton';
 import { ProductOfferLabel } from '../../product/ProductOfferLabel';
 
@@ -41,7 +42,7 @@ export const CartItem: FC<Props> = ({ item, onRemove, onUpdate }) => {
                     >
 
                       <div style={{aspectRatio: "16/9", position: "relative"}}>
-                        <Image fill src={thumbnailFile.filename} />
+                        <Image fill src={thumbnailFile.Width1024Filename} />
                       </div>
                       {activeOffer !== undefined && (
                         <div className={styles.offerLabel()}>

@@ -2,12 +2,12 @@ import type { FormikErrors } from 'formik';
 import { useFormik } from 'formik';
 import isEqual from 'lodash/isEqual';
 import type { FC } from 'react';
-import { memo } from 'react';
+import { memo, lazy } from 'react';
 import * as z from 'zod';
 
 import type { ReviewFragmentResponse } from '../../../graphql/fragments';
-import { PrimaryButton } from '../../foundation/PrimaryButton';
-import { TextArea } from '../../foundation/TextArea';
+const PrimaryButton = lazy(() => import('../../foundation/PrimaryButton'));
+const TextArea = lazy(() => import('../../foundation/TextArea'));
 import { ReviewList } from '../ReviewList';
 
 import * as styles from './ReviewSection.styles';

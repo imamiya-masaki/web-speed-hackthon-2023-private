@@ -9,7 +9,6 @@ import { PrimaryAnchor } from '../../components/foundation/PrimaryAnchor';
 import { WidthRestriction } from '../../components/foundation/WidthRestriction';
 import { ProductHeroImage } from '../../components/product/ProductHeroImage';
 import { useAuthUser } from '../../hooks/useAuthUser';
-import { useRecommendation } from '../../hooks/useRecommendation';
 import { loadFonts } from '../../utils/load_fonts';
 
 import * as styles from './OrderComplete.styles';
@@ -18,7 +17,6 @@ export const OrderComplete: FC = () => {
   const navigate = useNavigate();
   const [isReadyFont, setIsReadyFont] = useState(false);
   const { authUserLoading, isAuthUser } = useAuthUser();
-  const { recommendation } = useRecommendation();
 
   useEffect(() => {
     loadFonts().then(() => {
@@ -26,7 +24,7 @@ export const OrderComplete: FC = () => {
     });
   }, []);
 
-  if (!recommendation || !isReadyFont || authUserLoading) {
+  if (!isReadyFont || authUserLoading) {
     return null;
   }
   if (!isAuthUser) {
@@ -57,7 +55,7 @@ export const OrderComplete: FC = () => {
 
                 <div className={styles.recommended()}>
                   <h2 className={styles.recommendedHeading()}>こちらの商品もオススメです</h2>
-                  <ProductHeroImage product={recommendation.product} title={recommendation.product.name} />
+                  <ProductHeroImage />
                 </div>
 
                 <div className={styles.backToTopButtonWrapper()}>
