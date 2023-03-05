@@ -1,7 +1,7 @@
 import * as currencyFormatter from 'currency-formatter';
 import isEqual from 'lodash/isEqual';
 import type { FC } from 'react';
-import { memo, useState, useEffect } from 'react';
+import { memo, useEffect, useState } from 'react';
 
 
 import type { OrderFragmentResponse } from '../../../graphql/fragments';
