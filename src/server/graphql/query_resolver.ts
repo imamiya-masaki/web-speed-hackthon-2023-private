@@ -5,7 +5,7 @@ import { FeatureSection } from '../../model/feature_section';
 import { Product } from '../../model/product';
 import { Recommendation } from '../../model/recommendation';
 import { User } from '../../model/user';
-import { dataSource } from '../data_source';
+import { dataSource,  } from '../data_source';
 
 type QueryResolver = {
   features: GraphQLFieldResolver<unknown, Context, never, Promise<FeatureSection[]>>;
@@ -16,8 +16,13 @@ type QueryResolver = {
 };
 
 export const queryResolver: QueryResolver = {
-  features: () => {
-    return dataSource.manager.find(FeatureSection);
+  features: (parent, res) => {
+    const {skip, limit} = res
+    const object = {
+      skip: skip ?? 0,
+      take: limit ?? 1
+    }
+    return dataSource.manager.find(FeatureSection, object);
   },
   me: async (_parent, _args, { session }) => {
     if (session['userId'] == null) {

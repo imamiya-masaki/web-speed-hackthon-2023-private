@@ -1,4 +1,5 @@
 import type { FC, ReactNode } from 'react';
+import {Suspense } from 'react';
 
 import { Footer } from '../../navigators/Footer/Footer';
 import { Header } from '../../navigators/Header/Header';
@@ -12,7 +13,9 @@ type Props = {
 export const Layout: FC<Props> = ({ children }) => (
   <>
     <Header />
-    <main className={styles.container()}>{children}</main>
+    <Suspense  fallback={<main></main>}>
+      <main className={styles.container()}>{children}</main>
+    </Suspense>
     <Footer />
   </>
 );

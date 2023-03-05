@@ -6,6 +6,7 @@ import type { GraphQLModelResolver } from './model_resolver';
 
 export const featureSectionResolver: GraphQLModelResolver<FeatureSection> = {
   items: (parent) => {
+    // const {skip, limit} = res
     return dataSource.manager.find(FeatureItem, {
       relations: {
         product: true,
@@ -13,6 +14,8 @@ export const featureSectionResolver: GraphQLModelResolver<FeatureSection> = {
       where: {
         section: parent,
       },
+      // skip: skip ?? 0,
+      // take: limit ?? 1
     });
   },
 };

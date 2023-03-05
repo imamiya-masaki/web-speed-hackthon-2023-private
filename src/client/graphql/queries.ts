@@ -82,8 +82,8 @@ export type GetRecommendationsQueryResponse = {
 };
 
 export const GetFeatureSectionsQuery = gql`
-  query GetFeatureSections {
-    features {
+  query GetFeatureSections($skip: Int, $limit: Int) {
+    features(skip: $skip, limit: $limit) {
       id,
       title
       items {

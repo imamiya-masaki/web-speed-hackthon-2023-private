@@ -15,7 +15,7 @@ type Props = {
 
 export const ProductCard: FC<Props> = ({ product }) => {  
   // const thumbnailFile = product.media.find((productMedia) => productMedia.isThumbnail)?.file;
-  const thumbnailFile = product.media[0].file
+    const thumbnailFile = product.media[0].file
   // console.log(thumbnailFile)
   // debugger;
   const { activeOffer } = useActiveOffer(product);
